@@ -1,5 +1,6 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { FormsModule } from '@angular/forms';
 import { EventType, NavigationEnd, Router } from '@angular/router';
 import {
   injectSupportedLocale,
@@ -11,10 +12,12 @@ import { injectNamespaceT, LocalizeQuoteDirective } from './locale';
 
 @Component({
   selector: 'app-quote-shell',
-  imports: [LocalizeQuoteDirective],
+  imports: [LocalizeQuoteDirective, FormsModule],
   template: `
     <hr />
     <p localize="shared.welcomeMessage">Welcome to the locale library demo!</p>
+    <input [(ngModel)]="name" />
+    <p>{{ helloName() }}</p>
     <br />
     <p localize="quote.works">Quote works</p>
 
@@ -63,6 +66,12 @@ export class QuoteShellComponent {
   protected readonly t = injectNamespaceT();
   private readonly currentLocale = injectSupportedLocale();
   private readonly router = inject(Router);
+
+  readonly name = signal('John Doe');
+
+  readonly helloName = computed(() => {
+    return this.t('shared.hello', { name: this.name() });
+  });
 
   private readonly url = toSignal(
     this.router.events.pipe(
