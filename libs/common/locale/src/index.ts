@@ -1,5 +1,7 @@
 export { createNamespace } from './lib/compile-locale';
 
+export * from './lib/inject-supported-locale';
+export { SUPPORETED_LOCALES, SUPPORTED_LOCALE_LABELS } from './lib/locale.type';
 export {
   LocalizeDirective,
   SharedLocalizeDirective,

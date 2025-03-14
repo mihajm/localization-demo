@@ -7,8 +7,7 @@ import { injectSharedT } from '@app/locale';
   imports: [RouterOutlet],
   template: `
     <!-- wont translate as it's outside of the locale shell -->
-    {{ t('shared.welcomeMessage') }}
-
+    <p>This wont translate: "{{ t('shared.welcomeMessage') }}"</p>
     <router-outlet />
   `,
 })
