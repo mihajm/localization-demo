@@ -1,13 +1,17 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { NxWelcomeComponent } from './nx-welcome.component';
+import { RouterOutlet } from '@angular/router';
+import { injectSharedT } from '@app/locale';
 
 @Component({
-  imports: [NxWelcomeComponent, RouterModule],
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
+  imports: [RouterOutlet],
+  template: `
+    <!-- wont translate as it's outside of the locale shell -->
+    {{ t('shared.welcomeMessage') }}
+
+    <router-outlet />
+  `,
 })
 export class AppComponent {
-  title = 'demo';
+  protected readonly t = injectSharedT();
 }

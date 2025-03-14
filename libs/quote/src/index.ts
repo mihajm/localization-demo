@@ -1,1 +1,1 @@
-export * from './lib/quote.component';
+export * from './lib/quote.routes';
